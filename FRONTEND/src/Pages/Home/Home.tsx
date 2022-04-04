@@ -1,9 +1,10 @@
 import React from 'react'
 import withLayout from '../../hoc/withLayout'
+import SearchForm from "../../components/SearchForm"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div><SearchForm /></div>
   )
 }
 
