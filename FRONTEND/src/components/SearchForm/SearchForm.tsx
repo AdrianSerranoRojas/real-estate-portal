@@ -59,8 +59,8 @@ const {
           id="Search"
           value={values.Search}
           placeholder="Search City"
-          handleChange={handleChange}
-          handleBlur={handleBlur}
+          handleChange = { () => handleChange}
+          handleBlur = { () => handleBlur}
           hasErrorMessage={touched.Search}
           errorMessage={errors.Search}
         />
