@@ -1,6 +1,8 @@
 import {
- SET_SEARCH
+ SET_SEARCH,
+ API_SEARCH
 } from './types'
+import getProperties from '../../services/APIrequests';
 
 export const saveSearch = (newSearch) => (
   {
@@ -9,3 +11,15 @@ export const saveSearch = (newSearch) => (
   }
 );
 
+export const setRandomCounter = () => {
+  return async (dispatch) => {
+    // dispatch({ type: LOADING_COUNTER })
+    try {
+      const apiResult = await getProperties();
+      dispatch({ type: API_SEARCH, payload: apiResult })
+    } catch (error) {
+      console.log("carapolla",error)
+    //  dispatch({ type: ERROR_COUNTER })
+    }
+  }
+}

@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Input from "../Input";
 import Button from "../Button";
 
-import { saveSearch } from "../../redux/search/actions";
+import { saveSearch, setRandomCounter } from "../../redux/search/actions";
 
 
 
@@ -33,6 +33,7 @@ export default function SearchForm(){
     const handleSaveSearch = (newSearch) => {
       console.log(newSearch)
     dispatch(saveSearch(newSearch))
+    dispatch(setRandomCounter())
 }
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const navigate = useNavigate()
