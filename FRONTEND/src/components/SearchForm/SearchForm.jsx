@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 import { withFormik, FormikProps } from "formik";
 import { useFormik, Field } from "formik";
 
+import * as Yup from "yup";
+
 import Input from "../Input";
 import Button from "../Button";
-import * as Yup from "yup";
 
 import { saveSearch } from "../../redux/search/actions";
 
@@ -20,11 +21,9 @@ const searchSchema = Yup.object().shape({
     .required("The search is required")
 })
 
-    type FormValues = {
-        Search: string;
-    }
 
-    const initValues: FormValues ={
+
+    const initValues ={
         Search:""
     }
 
@@ -32,14 +31,14 @@ export default function SearchForm(){
 
     const dispatch = useDispatch();
 
-    const handleSaveSearch = (newSearch:FormValues) => {
+    const handleSaveSearch = (newSearch) => {
     dispatch(saveSearch(newSearch))
 }
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const navigate = useNavigate()
 
 
-    const formik = useFormik<FormValues>({
+    const formik = useFormik({
             initialValues:initValues,
             validationSchema:searchSchema,
             onSubmit:(values , {setSubmitting}) =>{

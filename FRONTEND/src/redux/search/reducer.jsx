@@ -1,12 +1,9 @@
 import INITIAL_STATE from "./state";
 import {  SET_SEARCH } from './types'
 
-type newSearch = {
-  type:string,
-  payload:object|string,
-}
 
-const reducer =  (state = INITIAL_STATE, action:newSearch) => {
+
+const reducer =  (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case SET_SEARCH:
       return {value : action.payload,
