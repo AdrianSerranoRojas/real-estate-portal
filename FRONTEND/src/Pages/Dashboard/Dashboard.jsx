@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 
 const Dashboard = () => {
     const {status, value} = useSelector(state => state.search)
+    console.log(value)
   return (
-    <div>Dashboard {value} {status === "ok" ? value : "loading"}</div>
+    <div>Dashboard {status === "ok" ? value.Search : "loading"}</div>
   )
 }
 

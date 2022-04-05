@@ -2,8 +2,7 @@ import React, {Component, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { withFormik, FormikProps } from "formik";
-import { useFormik, Field } from "formik";
+import { useFormik } from "formik";
 
 import * as Yup from "yup";
 
@@ -32,6 +31,7 @@ export default function SearchForm(){
     const dispatch = useDispatch();
 
     const handleSaveSearch = (newSearch) => {
+      console.log(newSearch)
     dispatch(saveSearch(newSearch))
 }
     const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -46,7 +46,7 @@ export default function SearchForm(){
                 setSubmitting(true)
                 setTimeout(() => {
                 setHasSubmitted(true);
-            }, 500);
+            }, 1000);
         }
     })
 
@@ -83,7 +83,7 @@ const {
         </Button>
       </form>
 
-       {/* {hasSubmitted &&  navigate("/Home") } */}
+       {hasSubmitted &&  navigate("/dashboard") }
     </>
   );
 }
