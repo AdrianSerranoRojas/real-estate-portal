@@ -1,11 +1,17 @@
 import React, {Component, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { withFormik, FormikProps } from "formik";
 import { useFormik, Field } from "formik";
 
 import Input from "../Input";
 import Button from "../Button";
 import * as Yup from "yup";
+
+import { saveSearch } from "../../redux/search/actions";
+
+
 
 const searchSchema = Yup.object().shape({
     Search: Yup.string()
@@ -23,8 +29,13 @@ const searchSchema = Yup.object().shape({
     }
 
 export default function SearchForm(){
-    const [hasSubmitted, setHasSubmitted] = useState(false);
 
+    const dispatch = useDispatch();
+
+    const handleSaveSearch = (newSearch:FormValues) => {
+    dispatch(saveSearch(newSearch))
+}
+    const [hasSubmitted, setHasSubmitted] = useState(false);
     const navigate = useNavigate()
 
 
@@ -32,7 +43,7 @@ export default function SearchForm(){
             initialValues:initValues,
             validationSchema:searchSchema,
             onSubmit:(values , {setSubmitting}) =>{
-                saveSearch(values)
+                handleSaveSearch(values)
                 setSubmitting(true)
                 setTimeout(() => {
                 setHasSubmitted(true);
@@ -59,8 +70,8 @@ const {
           id="Search"
           value={values.Search}
           placeholder="Search City"
-          handleChange = { () => handleChange}
-          handleBlur = { () => handleBlur}
+          handleChange = { handleChange}
+          handleBlur = {  handleBlur}
           hasErrorMessage={touched.Search}
           errorMessage={errors.Search}
         />
@@ -73,7 +84,7 @@ const {
         </Button>
       </form>
 
-      {hasSubmitted &&  navigate("/Home") }
+       {/* {hasSubmitted &&  navigate("/Home") } */}
     </>
   );
 }

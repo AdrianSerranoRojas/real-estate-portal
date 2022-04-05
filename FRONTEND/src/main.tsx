@@ -6,11 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 import App from './App'
+import ReduxProvider from './redux/Provider';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
+      <ReduxProvider>
+        <App />
+      </ReduxProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
