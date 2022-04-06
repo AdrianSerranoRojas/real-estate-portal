@@ -84,7 +84,7 @@ const {
         </Button>
       </form>
 
-       {hasSubmitted &&  navigate("/dashboard") }
+      {hasSubmitted &&  navigate("/dashboard") }
     </>
   );
 }

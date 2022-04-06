@@ -6,11 +6,12 @@ import {  SET_SEARCH, API_SEARCH } from './types'
 const reducer =  (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case SET_SEARCH:
-      return {value : action.payload,
-              status:"ok"};
+      return {...state,
+              value : action.payload,
+              status:"ok get search"};
 
     case API_SEARCH:
-      return {...state, 
+      return {...state,
               responses : action.payload,
               status:"ok"};
     default:

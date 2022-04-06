@@ -1,10 +1,19 @@
 import axios from "axios";
 
 async function getProperties() {
-  const result = await axios
-    .get("http://localhost:3000/properties")
-    .then((res) => console.log(res));
-  await console.log(result);
+  var config = {
+    method: "get",
+    url: "http://localhost:3000/properties",
+    headers: {},
+  };
+  const result = await axios(config)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  console.log(result);
   return result;
 }
 
