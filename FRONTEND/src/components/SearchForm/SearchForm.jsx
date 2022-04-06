@@ -1,6 +1,6 @@
-import React, {Component, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useFormik } from "formik";
 
@@ -11,47 +11,50 @@ import Button from "../Button";
 
 import { saveSearch, setRandomCounter } from "../../redux/search/actions";
 
-
-
 const searchSchema = Yup.object().shape({
-    Search: Yup.string()
+  Search: Yup.string()
     .min(2, "the search is too short")
     .max(10, "too long")
-    .required("The search is required")
-})
+    .required("The search is required"),
+});
 
+const initValues = {
+  Search: "",
+};
 
+export default function SearchForm() {
+  const dispatch = useDispatch();
 
-    const initValues ={
-        Search:""
+  const { status, value, responses } = useSelector((state) => state.search);
+
+  const handleSaveSearch = (newSearch) => {
+    console.log(newSearch);
+    dispatch(saveSearch(newSearch));
+    dispatch(setRandomCounter());
+    console.log(status)
+  };
+  
+  useEffect(()=>{
+    if (status == "ok") {
+      setHasSubmitted(true);
     }
+  }, [status]
+  )
 
-export default function SearchForm(){
+  console.log(status)
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: initValues,
+    validationSchema: searchSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      handleSaveSearch(values);
+      setSubmitting(true);
+    },
+  });
 
-    const handleSaveSearch = (newSearch) => {
-      console.log(newSearch)
-    dispatch(saveSearch(newSearch))
-    dispatch(setRandomCounter())
-}
-    const [hasSubmitted, setHasSubmitted] = useState(false);
-    const navigate = useNavigate()
-
-
-    const formik = useFormik({
-            initialValues:initValues,
-            validationSchema:searchSchema,
-            onSubmit:(values , {setSubmitting}) =>{
-                handleSaveSearch(values)
-                setSubmitting(true)
-                setTimeout(() => {
-                setHasSubmitted(true);
-            }, 1000);
-        }
-    })
-
-const {
+  const {
     values,
     errors,
     touched,
@@ -59,9 +62,9 @@ const {
     handleBlur,
     handleSubmit,
     isSubmitting,
-} = formik;
+  } = formik;
 
-    return (
+  return (
     <>
       <form onSubmit={handleSubmit}>
         <Input
@@ -70,8 +73,8 @@ const {
           id="Search"
           value={values.Search}
           placeholder="Search City"
-          handleChange = { handleChange}
-          handleBlur = {  handleBlur}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
           hasErrorMessage={touched.Search}
           errorMessage={errors.Search}
         />
@@ -84,7 +87,7 @@ const {
         </Button>
       </form>
 
-      {hasSubmitted &&  navigate("/dashboard") }
+      {hasSubmitted && navigate("/dashboard")}
     </>
   );
 }

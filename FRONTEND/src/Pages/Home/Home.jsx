@@ -1,11 +1,23 @@
-import React from 'react'
-import withLayout from '../../hoc/withLayout'
-import SearchForm from "../../components/SearchForm"
+import React, { useEffect } from "react";
+
+import withLayout from "../../hoc/withLayout";
+
+import SearchForm from "../../components/SearchForm";
+
+import { resetSearch } from "../../redux/search/actions";
+
+import { useDispatch } from "react-redux";
 
 const Home = () => {
-  return (
-    <div><SearchForm /></div>
-  )
-}
+  const dispatch = useDispatch();
 
-export default withLayout(Home)
+  dispatch(resetSearch());
+
+  return (
+    <div>
+      <SearchForm />
+    </div>
+  );
+};
+
+export default withLayout(Home);
