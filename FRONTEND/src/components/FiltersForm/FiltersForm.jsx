@@ -1,18 +1,15 @@
-import React,{useState}  from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { useFormik } from "formik";
 
-import { useFormik } from 'formik'
+import filterSchema from "./filterSchema";
 
-import filterSchema from "./filterSchema"
-
-import Input from "../Input"
-import Button from "../Button"
-
-
+import Input from "../Input";
+import Checkbox from "../Checkbox";
+import Button from "../Button";
 
 const FiltersForm = () => {
-
   const initValues = {
     air_conditioning: false,
     garden: false,
@@ -33,29 +30,59 @@ const FiltersForm = () => {
 
   const dispatch = useDispatch();
 
-  const {status, value, responses} = useSelector(state => state.search)
+  const { status } = useSelector((state) => state.search);
 
-  const handleSaveFilters = (){
+  // const handleSaveFilters = (){
 
-
-    setHasSubmitted(true);
-  }
+  //   setHasSubmitted(true);
+  // }
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const formik = useFomik({
-    initialValues:initValues,
-    validationSchema:filterSchema,
-    onSubmit: (values , {setSubmitting})=>{
-      handleSaveFilters(values)
-      setSubmitting(true)
-    }
-  })
-
+  const formik = useFormik({
+    initialValues: initValues,
+    validationSchema: filterSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      handleSaveFilters(values);
+      setSubmitting(true);
+    },
+  });
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = formik;
 
   return (
-    <div>FiltersForm</div>
-  )
-}
+    <>
+      <form onSubmit={handleSubmit}>
+        <Checkbox
+          type="checkbox"
+          label="Air conditioning"
+          id="Air"
+          value={values.Air}
+          placeholder="Air"
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          hasErrorMessage={touched.Air}
+          errorMessage={errors.Air}
+        />
+        <Button
+          submitButton
+          block
+          disabled={formik.isValidating || !formik.isValid}
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
+      </form>
 
-export default FiltersForm
+      {hasSubmitted && navigate("/dashboard")}
+    </>
+  );
+};
+
+export default FiltersForm;

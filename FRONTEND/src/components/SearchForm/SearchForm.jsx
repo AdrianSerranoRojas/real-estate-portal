@@ -31,17 +31,16 @@ export default function SearchForm() {
     console.log(newSearch);
     dispatch(saveSearch(newSearch));
     dispatch(setRandomCounter());
-    console.log(status)
+    console.log(status);
   };
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     if (status == "ok") {
       setHasSubmitted(true);
     }
-  }, [status]
-  )
+  }, [status]);
 
-  console.log(status)
+  console.log(status);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const navigate = useNavigate();
 
