@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import Input from "../Input";
 import Button from "../Button";
 
-import { saveSearch, setRandomCounter } from "../../redux/search/actions";
+import { saveSearch, saveProperties } from "../../redux/search/actions";
 
 const searchSchema = Yup.object().shape({
   Search: Yup.string()
@@ -30,7 +30,7 @@ export default function SearchForm() {
   const handleSaveSearch = (newSearch) => {
     console.log(newSearch);
     dispatch(saveSearch(newSearch));
-    dispatch(setRandomCounter());
+    dispatch(saveProperties(newSearch.Search));
     console.log(status);
   };
 

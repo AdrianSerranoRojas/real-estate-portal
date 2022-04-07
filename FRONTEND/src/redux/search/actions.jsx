@@ -10,11 +10,11 @@ export const resetSearch = () => ({
   type: RESET_SEARCH,
 });
 
-export const setRandomCounter = () => {
+export const saveProperties = (value) => {
   return async (dispatch) => {
     // dispatch({ type: LOADING_COUNTER })
     try {
-      const apiResult = await getProperties();
+      const apiResult = await getProperties(value);
       dispatch({ type: API_SEARCH, payload: apiResult });
     } catch (error) {
       console.log("carapolla", error);

@@ -1,9 +1,10 @@
 import axios from "axios";
 
-async function getProperties() {
+async function getProperties(value) {
+  console.log(value);
   var config = {
     method: "get",
-    url: "http://localhost:3000/properties",
+    url: `http://localhost:3000/properties?province=${value}`,
     headers: {},
   };
   const result = await axios(config)
