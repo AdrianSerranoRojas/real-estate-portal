@@ -19,6 +19,7 @@
     "react-router-dom": "^6.3.0",
     "react-select": "^5.2.2",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.50.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

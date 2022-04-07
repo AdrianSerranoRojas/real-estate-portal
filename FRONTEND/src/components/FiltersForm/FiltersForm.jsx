@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 
 import filterSchema from "./filterSchema";
 
@@ -50,9 +50,9 @@ const FiltersForm = () => {
   // }
 
   const handleSubmit = (values) => {
-      console.log(values);
-      handleSaveFilters(values);
-    }
+    console.log(values);
+    handleSaveFilters(values);
+  };
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -78,25 +78,38 @@ const FiltersForm = () => {
 
   return (
     <>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={initValues}
-        validationSchema={filterSchema}
-      >
-        <Form>
-          <SelectField name="name" options={options} />
-          {/* <Checkbox
-            type="checkbox"
-            label="Garden"
-            id="garden"
-            placeholder="garden"
-            handleChange={this.handleChange}
-            handleBlur={this.handleBlur}
-            hasErrorMessage={this.touched.garden}
-            errorMessage={this.errors.garden}
-            submitForm={this.submitForm}
-          />
-          <Checkbox
+      <div className="container">
+        <div className="form-container">
+          <Formik
+            onSubmit={handleSubmit}
+            initialValues={initValues}
+            validationSchema={filterSchema}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              errors,
+              values,
+              touched,
+              isValidating,
+              isValid,
+              submitForm
+            }) => (
+              <Form>
+                <SelectField name="name" options={options} />
+                <Checkbox
+                  type="checkbox"
+                  label="Garden"
+                  id="garden"
+                  placeholder="garden"
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  hasErrorMessage={touched.garden}
+                  errorMessage={errors.garden}
+                  submitForm={submitForm}
+                />
+                {/* <Checkbox
             type="checkbox"
             label="Swimming Pool"
             id="pool"
@@ -120,17 +133,20 @@ const FiltersForm = () => {
             errorMessage={errors.air}
             submitForm={submitForm}
           /> */}
-          <Button
-            submitButton
-            block
-            disabled={false}
-            // disabled={formik.isValidating || !formik.isValid}
-          >
-            {/* {isSubmitting ? "Submitting..." : "Submit"} */}
-            Submit
-          </Button>
-        </Form>
-      </Formik>
+                <Button
+                  submitButton
+                  block
+                  disabled={false}
+                  // disabled={formik.isValidating || !formik.isValid}
+                >
+                  {/* {isSubmitting ? "Submitting..." : "Submit"} */}
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </div>
       {hasSubmitted && navigate("/dashboard")}
     </>
   );

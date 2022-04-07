@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 const Home = () => {
   const dispatch = useDispatch();
 
-  dispatch(resetSearch());
+    dispatch(resetSearch());
 
   return (
     <div>
