@@ -5,6 +5,10 @@ const searchSchema = Yup.object().shape({
   garden: Yup.boolean(),
   // lift: Yup.boolean(),
   swimming_pool: Yup.boolean(),
+  // name: Yup.object({
+  //   label: Yup.string().required(),
+  //   value: Yup.string().required("Name is a required field"),
+  // }),
   // terrace: Yup.boolean(),
   // pet: Yup.boolean(),
 
