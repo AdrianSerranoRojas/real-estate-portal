@@ -7,9 +7,11 @@ function Checkbox({
   value = "",
   placeholder = "",
   handleChange = () => {},
+  handleSubmit = () => {},
   handleBlur = () => {},
   errorMessage = "",
   hasErrorMessage = false,
+  submitForm = () => {},
   ...props
 }) {
   return (
@@ -24,7 +26,7 @@ function Checkbox({
         type={type}
         value={value}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={(event) => { handleChange(event), submitForm()}}
         onBlur={handleBlur}
         {...props}
       />

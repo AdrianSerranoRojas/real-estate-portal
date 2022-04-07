@@ -11,10 +11,10 @@ import Button from "../Button";
 
 const FiltersForm = () => {
   const initValues = {
-    air_conditioning: false,
-    garden: false,
+    air: false,
     lift: false,
-    swimming_pool: false,
+    garden: false,
+    pool: false,
     terrace: false,
     pet: false,
 
@@ -43,6 +43,7 @@ const FiltersForm = () => {
     initialValues: initValues,
     validationSchema: filterSchema,
     onSubmit: (values, { setSubmitting }) => {
+      console.log(values);
       handleSaveFilters(values);
       setSubmitting(true);
     },
@@ -55,6 +56,7 @@ const FiltersForm = () => {
     handleBlur,
     handleSubmit,
     isSubmitting,
+    submitForm
   } = formik;
 
   return (
@@ -62,14 +64,38 @@ const FiltersForm = () => {
       <form onSubmit={handleSubmit}>
         <Checkbox
           type="checkbox"
-          label="Air conditioning"
-          id="Air"
-          value={values.Air}
-          placeholder="Air"
+          label="Garden"
+          id="garden"
+          placeholder="garden"
           handleChange={handleChange}
           handleBlur={handleBlur}
-          hasErrorMessage={touched.Air}
-          errorMessage={errors.Air}
+          hasErrorMessage={touched.garden}
+          errorMessage={errors.garden}
+          submitForm={submitForm}
+        />
+        <Checkbox
+          type="checkbox"
+          label="Swimming Pool"
+          id="pool"
+          value={values.pool}
+          placeholder="pool"
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          hasErrorMessage={touched.pool}
+          errorMessage={errors.pool}
+          submitForm={submitForm}
+        />
+        <Checkbox
+          type="checkbox"
+          label="Air conditioning"
+          id="air"
+          value={values.air}
+          placeholder="air"
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          hasErrorMessage={touched.air}
+          errorMessage={errors.air}
+          submitForm={submitForm}
         />
         <Button
           submitButton
