@@ -17,7 +17,7 @@ export const saveProperties = (value) => {
       const apiResult = await getProperties(value);
       dispatch({ type: API_SEARCH, payload: apiResult });
     } catch (error) {
-      console.log("carapolla", error);
+      console.log("error: ", error);
       //  dispatch({ type: ERROR_COUNTER })
     }
   };

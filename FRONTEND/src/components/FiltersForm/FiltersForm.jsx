@@ -77,15 +77,16 @@ const FiltersForm = () => {
 
   const dispatch = useDispatch();
 
-  const { status } = useSelector((state) => state.search);
+  const { value } = useSelector((state) => state.search);
 
   // function handleSubmit(values) {
   //   console.log(values);
   //   alert(JSON.stringify(values));
   // }
 
-  const handleSaveFilters = (values) => {
-    let string = ""
+  const handleSaveFiltersString = (values) => {
+    console.log(value.Search);
+    let string = `&province=${value.Search}`;
     if(values.baths){
       values.baths.forEach(element => {
         string += `&bath=${element.value}`
@@ -127,12 +128,13 @@ const FiltersForm = () => {
         string += `&type=${element.value}`
       });
     }
-    console.log(string);
+    return string
   }
 
   const handleSubmit = (values) => {
     console.log(values);
-    handleSaveFilters(values);
+    const filterString = handleSaveFiltersString(values);
+    console.log(filterString);
   };
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
