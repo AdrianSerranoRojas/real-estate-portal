@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,10 +7,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import Input from "../Input";
-import Button from "../Button";
 
-import { saveSearch, saveProperties } from "../../redux/search/actions";
-import { SavePropertiesFiltered } from "../../redux/filter/actions";
+import { SavePropertiesFiltered, saveSearch } from "../../redux/filter/actions";
 
 const searchSchema = Yup.object().shape({
   Search: Yup.string()
@@ -26,9 +24,7 @@ const initValues = {
 export default function SearchForm() {
   const dispatch = useDispatch();
 
-  const { status, value, realProperties } = useSelector(
-    (state) => state.search
-  );
+  const { value } = useSelector((state) => state.filter);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleSaveSearch = (newSearch) => {

@@ -35,4 +35,3 @@ export async function getPropertiesFiltered(value) {
   console.log(result);
   return result;
 }
-

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 
 import filterSchema from "./filterSchema";
 
-import Input from "../Input";
-import Checkbox from "../Checkbox";
 import Button from "../Button";
 import SelectFieldMulty from "../SelectFieldMulty/SelectFieldMulty";
 import SelectField from "../SelectField/SelectField";
+
 import { SavePropertiesFiltered } from "../../redux/filter/actions";
 
 const FiltersForm = () => {
@@ -78,12 +77,7 @@ const FiltersForm = () => {
 
   const dispatch = useDispatch();
 
-  const { value } = useSelector((state) => state.search);
-
-  // function handleSubmit(values) {
-  //   console.log(values);
-  //   alert(JSON.stringify(values));
-  // }
+  const { value } = useSelector((state) => state.filter);
 
   const handleSaveFiltersString = (values) => {
     console.log(value.Search);

@@ -1,16 +1,16 @@
 import INITIAL_STATE from "./state";
-import { SET_FILTER, API_FILTER, RESET_FILTER } from "./types";
+import { SET_FILTER, API_FILTER, SET_SEARCH } from "./types";
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_FILTER:
-      return { ...state, value: action.payload, status: "ok get filter" };
+      return { ...state, value: action.payload };
 
     case API_FILTER:
-      return { ...state, realProperties: action.payload, status: "ok" };
+      return { ...state, realProperties: action.payload };
 
-    case RESET_FILTER:
-      return { ...state, value: "", status: "not ok 2", realProperties: "" };
+    case SET_SEARCH:
+      return { ...state, value: action.payload };
 
     default:
       return state;

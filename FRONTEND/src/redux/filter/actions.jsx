@@ -1,19 +1,24 @@
-import { SET_FILTER, API_FILTER, RESET_FILTER } from "./types";
+import { SET_FILTER, API_FILTER, SET_SEARCH } from "./types";
 
 //dsfsdfsdfsd fdsfsd sdff ert
-
 
 //aqui no se lo que va en el get properties
 import { getPropertiesFiltered } from "../../services/APIrequests";
 
+// Filter value
 export const saveFilter = (newSearch) => ({
   type: SET_FILTER,
   payload: newFILTER,
 });
 
-export const resetFilter = () => ({
-  type: RESET_FILTER,
+// Filter value
+
+// Search value
+export const saveSearch = (newSearch) => ({
+  type: SET_SEARCH,
+  payload: newSearch,
 });
+// Search value
 
 export const SavePropertiesFiltered = (string) => {
   return async (dispatch) => {

@@ -9,12 +9,12 @@ import PropertiesListing from "../../components/PropertiesListing";
 const Dashboard = () => {
   const params = useParams();
 
-  const { value, realProperties } = useSelector((state) => state.search);
+  const { realProperties } = useSelector((state) => state.filter);
   const { isLoading } = useSelector((state) => state.isLoading);
 
   let hasError = false;
 
-  console.log(value, realProperties);
+  console.log(realProperties);
   console.log(params);
   return (
     <>
