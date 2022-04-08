@@ -1,27 +1,28 @@
 import React from "react";
 import withLayout from "../../hoc/withLayout";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 import FiltersForm from "../../components/FiltersForm/FiltersForm";
 import PropertiesListing from "../../components/PropertiesListing";
 
 const Dashboard = () => {
   const params = useParams();
-  const { status, value, realProperties } = useSelector(
-    (state) => state.search
-  );
+
+  const { value, realProperties } = useSelector((state) => state.search);
   const { isLoading } = useSelector((state) => state.isLoading);
+
   let hasError = false;
+
   console.log(value, realProperties);
   console.log(params);
   return (
     <>
       <main className="container-fluid">
         <div className="row">
-       <div className="col col-4">
-          <FiltersForm />
-         </div>
+          <div className="col col-4">
+            <FiltersForm />
+          </div>
           <div className="col col-8">
             <div className="row">
               <div className="col col-12">
@@ -47,33 +48,13 @@ const Dashboard = () => {
                   </pre>
                 </div>
               )}
-              {/* {newProductFormOpen && (
-                <div className="col col-12">
-                  <NewProductForm
-                    saveNewProduct={saveNewProduct}
-                    toggleNewProductForm={toggleNewProductForm}
-                  />
-                </div>
-              )} */}
               {!isLoading && !hasError && (
                 <div className="col col-12">
-                  <PropertiesListing
-                  // handleDownVote={handleDownVote}
-                  // handleUpVote={handleUpVote}
-                  // handleSetFavorite={handleSetFavorite}
-                  // handleAddToCart={handleAddToCart}
-                  />
+                  <PropertiesListing />
                 </div>
               )}
             </div>
           </div>
-
-          {/* <Cart
-            className="col col-4"
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          /> */}
         </div>
       </main>
     </>

@@ -26,22 +26,18 @@ const initValues = {
 export default function SearchForm() {
   const dispatch = useDispatch();
 
-  const { status, value, realProperties } = useSelector((state) => state.search);
+  const { status, value, realProperties } = useSelector(
+    (state) => state.search
+  );
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleSaveSearch = (newSearch) => {
     console.log(newSearch);
-    let filter = `province=${newSearch.Search}`
+    let filter = `province=${newSearch.Search}`;
     dispatch(saveSearch(newSearch));
     dispatch(SavePropertiesFiltered(filter));
     setHasSubmitted(true);
   };
-
-  // useEffect(() => {
-  //   if (status == "ok") {
-  //     setHasSubmitted(true);
-  //   }
-  // }, [status]);
 
   const navigate = useNavigate();
 
@@ -90,7 +86,7 @@ export default function SearchForm() {
           </form>
           {hasSubmitted &&
             setTimeout(() => {
-              navigate("/dashboard");
+              navigate(`/dashboard/province=${value.Search}`);
             }, 500)}
         </div>
       </div>

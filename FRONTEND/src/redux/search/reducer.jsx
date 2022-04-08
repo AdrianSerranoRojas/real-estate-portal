@@ -10,7 +10,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, realProperties: action.payload, status: "ok" };
 
     case RESET_SEARCH:
-      return { ...state, value: "", status: "not ok 2", realProperties: "" };
+      return { ...state, value: "", status: "not ok 2" };
 
     default:
       return state;
