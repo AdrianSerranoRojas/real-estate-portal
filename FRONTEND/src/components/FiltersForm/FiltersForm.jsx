@@ -13,19 +13,19 @@ import SelectField from "../SelectField/SelectField";
 
 const FiltersForm = () => {
   const optionsPrice_gte = [
-    { value: "50 000", label: "50 000" },
-    { value: "100 000", label: "100 000" },
-    { value: "150 000", label: "150 000" },
-    { value: "200 000", label: "200 000" },
-    { value: "250 000", label: "250 000" },
+    { value: "50000", label: "50 000" },
+    { value: "100000", label: "100 000" },
+    { value: "150000", label: "150 000" },
+    { value: "200000", label: "200 000" },
+    { value: "250000", label: "250 000" },
   ];
 
   const optionsPrice_lte = [
-    { value: "50 000", label: "50 000" },
-    { value: "100 000", label: "100 000" },
-    { value: "150 000", label: "150 000" },
-    { value: "200 000", label: "200 000" },
-    { value: "250 000", label: "250 000" },
+    { value: "50000", label: "50 000" },
+    { value: "100000", label: "100 000" },
+    { value: "150000", label: "150 000" },
+    { value: "200000", label: "200 000" },
+    { value: "250000", label: "250 000" },
   ];
 
   const optionsRooms = [
@@ -84,9 +84,51 @@ const FiltersForm = () => {
   //   alert(JSON.stringify(values));
   // }
 
-  // const handleSaveFilters = (){
-  //   setHasSubmitted(true);
-  // }
+  const handleSaveFilters = (values) => {
+    let string = ""
+    if(values.baths){
+      values.baths.forEach(element => {
+        string += `&bath=${element.value}`
+      });
+    }
+    if(values.conditions){
+      values.conditions.forEach(element => {
+        string += `&condition=${element.value}`
+      });
+    }
+    if(values.extras){
+      values.extras.forEach(element => {
+        if (element.value.garden == true)
+        string += `&garden=true`
+        if (element.value.air == true)
+        string += `&air_conditioning=true`
+        if (element.value.pet == true)
+        string += `&pet=true`
+      });
+    }
+    if(values.price_gte.value){
+      string += `&price_gte=${values.price_gte.value}`
+    }
+    if(values.price_lte.value){
+      string += `&price_lte=${values.price_lte.value}`
+    }
+    if(values.rooms){
+      values.rooms.forEach(element => {
+        string += `&room=${element.value}`
+      });
+    }
+    if(values.status){
+      values.status.forEach(element => {
+        string += `&status=${element.value}`
+      });
+    }
+    if(values.type){
+      values.type.forEach(element => {
+        string += `&type=${element.value}`
+      });
+    }
+    console.log(string);
+  }
 
   const handleSubmit = (values) => {
     console.log(values);

@@ -1,17 +1,20 @@
 import React from "react";
 import withLayout from "../../hoc/withLayout";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom"
 
 import FiltersForm from "../../components/FiltersForm/FiltersForm";
 import PropertiesListing from "../../components/PropertiesListing";
 
 const Dashboard = () => {
+  const params = useParams();
   const { status, value, realProperties } = useSelector(
     (state) => state.search
   );
   const { isLoading } = useSelector((state) => state.isLoading);
   let hasError = false;
   console.log(value, realProperties);
+  console.log(params);
   return (
     <>
       <main className="container-fluid">
