@@ -1,5 +1,5 @@
 import { SET_SEARCH, API_SEARCH, RESET_SEARCH } from "./types";
-import getProperties from "../../services/APIrequests";
+import { getProperties } from "../../services/APIrequests";
 
 export const saveSearch = (newSearch) => ({
   type: SET_SEARCH,

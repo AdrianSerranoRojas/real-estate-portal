@@ -4,7 +4,7 @@ import { SET_FILTER, API_FILTER, RESET_FILTER } from "./types";
 
 
 //aqui no se lo que va en el get properties
-import getProperties from "../../services/APIrequests";
+import { getPropertiesFiltered } from "../../services/APIrequests";
 
 export const saveFilter = (newSearch) => ({
   type: SET_FILTER,
@@ -15,11 +15,11 @@ export const resetFilter = () => ({
   type: RESET_FILTER,
 });
 
-export const setRandomCounter = () => {
+export const SavePropertiesFiltered = (string) => {
   return async (dispatch) => {
     // dispatch({ type: LOADING_COUNTER })
     try {
-      const apiResult = await getProperties();
+      const apiResult = await getPropertiesFiltered(string);
       dispatch({ type: API_FILTER, payload: apiResult });
     } catch (error) {
       console.log("carapolla", error);

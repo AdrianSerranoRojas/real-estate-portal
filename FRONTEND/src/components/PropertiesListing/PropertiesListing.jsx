@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import PropertieCard from "../PropertieCard";
 
 function PropertiesListing({ ...props }) {
-  const { realProperties } = useSelector((state) => state.search);
+  const { realProperties } = useSelector((state) => state.filter);
   console.log(realProperties);
 
   return (

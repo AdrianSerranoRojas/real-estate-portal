@@ -10,6 +10,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import { saveSearch, saveProperties } from "../../redux/search/actions";
+import { SavePropertiesFiltered } from "../../redux/filter/actions";
 
 const searchSchema = Yup.object().shape({
   Search: Yup.string()
@@ -26,20 +27,21 @@ export default function SearchForm() {
   const dispatch = useDispatch();
 
   const { status, value, realProperties } = useSelector((state) => state.search);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleSaveSearch = (newSearch) => {
     console.log(newSearch);
     dispatch(saveSearch(newSearch));
-    dispatch(saveProperties(newSearch.Search));
+    dispatch(SavePropertiesFiltered(newSearch.Search));
+    setHasSubmitted(true);
   };
 
-  useEffect(() => {
-    if (status == "ok") {
-      setHasSubmitted(true);
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status == "ok") {
+  //     setHasSubmitted(true);
+  //   }
+  // }, [status]);
 
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const formik = useFormik({

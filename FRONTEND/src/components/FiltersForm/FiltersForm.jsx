@@ -10,6 +10,7 @@ import Checkbox from "../Checkbox";
 import Button from "../Button";
 import SelectFieldMulty from "../SelectFieldMulty/SelectFieldMulty";
 import SelectField from "../SelectField/SelectField";
+import { SavePropertiesFiltered } from "../../redux/filter/actions";
 
 const FiltersForm = () => {
   const optionsPrice_gte = [
@@ -135,6 +136,7 @@ const FiltersForm = () => {
     console.log(values);
     const filterString = handleSaveFiltersString(values);
     console.log(filterString);
+    dispatch(SavePropertiesFiltered(filterString));
   };
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
