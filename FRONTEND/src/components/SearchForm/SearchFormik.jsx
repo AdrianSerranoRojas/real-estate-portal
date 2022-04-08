@@ -25,7 +25,9 @@ const initValues = {
 export default function SearchForm() {
   const dispatch = useDispatch();
 
-  const { status, value, responses } = useSelector((state) => state.search);
+  const { status, value, realProperties } = useSelector(
+    (state) => state.search
+  );
 
   const handleSaveSearch = (newSearch) => {
     console.log(newSearch);

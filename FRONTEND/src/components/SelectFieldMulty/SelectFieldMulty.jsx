@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import { useFormikContext, useField } from "formik";
 
-export default function SelectField({ options,submitForm=()=>{}, ...props }) {
+export default function SelectField({ options, ...props }) {
   const { setFieldValue, setFieldTouched } = useFormikContext();
   const [field, meta] = useField(props.name);
   
@@ -19,9 +19,8 @@ export default function SelectField({ options,submitForm=()=>{}, ...props }) {
         {...field}
         {...props}
         isMulti
-        onChange={(event) => {handleChange(event), submitForm() }}
+        onChange={handleChange}
         onBlur={handleBlur}
-        // submitForm={submitForm}
       />
       {meta.touched && meta.error ? <span>{meta.error.value}</span> : null}
     </>

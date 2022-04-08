@@ -1,3 +1,3 @@
-const INITIAL_STATE = { status: 'not ok', value: "", responses:{} };
+const INITIAL_STATE = { status: "not ok", value: "", realProperties: [{}] };
 
 export default INITIAL_STATE;

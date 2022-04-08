@@ -26,7 +26,9 @@ function Checkbox({
         type={type}
         value={value}
         placeholder={placeholder}
-        onChange={(event) => { handleChange(event), submitForm()}}
+        onChange={(event) => {
+          handleChange(event), submitForm();
+        }}
         onBlur={handleBlur}
         {...props}
       />

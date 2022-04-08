@@ -48,7 +48,8 @@
       "air_conditioning": true,
       "swimming_pool": false,
       "terrace": true,
-      "publication_date": "2020/12/01 01:01:01"
+      "publication_date": "2020/12/01 01:01:01", 
+      "img":"https://img.remediosdigitales.com/8e8f64/lo-de-que-comprar-una-casa-es-la-mejor-inversion-hay-generaciones-que-ya-no-lo-ven-ni-de-lejos---1/840_560.jpg"
     },
     {
       "id": 2,
@@ -72,7 +73,8 @@
       "air_conditioning": true,
       "swimming_pool": false,
       "terrace": true,
-      "publication_date": "2020/12/01 01:01:01"
+      "publication_date": "2020/12/01 01:01:01",
+      "img":"https://cdn.rentokil.com/content/global/images/desktop/main_exterior.jpg"
     }
   ],
   "favorite": [

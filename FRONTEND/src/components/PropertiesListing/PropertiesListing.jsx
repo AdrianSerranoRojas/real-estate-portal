@@ -1,31 +1,28 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import PropertieCard from "../PropertieCard";
 
-function PropertiesListing({
-  products,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
-  ...props
-}) {
+function PropertiesListing({ ...props }) {
+  const { realProperties } = useSelector((state) => state.search);
+  console.log(realProperties);
+
   return (
     <section className="row" {...props}>
-      {products.map((product) => (
+      {realProperties.map((realPropertie) => (
         <PropertieCard
-          key={product.id}
-          id={product.id}
-          img={product.img}
-          title={product.title}
-          shortDescription={product.shortDescription}
-          upVotes={product.votes.upVotes}
-          handleUpVote={handleUpVote}
-          downVotes={product.votes.downVotes}
-          handleDownVote={handleDownVote}
-          isFavorite={product.isFavorite}
-          handleSetFavorite={handleSetFavorite}
-          handleAddToCart={handleAddToCart}
+          key={realPropertie.id}
+          id={realPropertie.id}
+          description={realPropertie.description}
+          city={realPropertie.city}
+          img={realPropertie.img}
+          // upVotes={realPropertie.votes.upVotes}
+          // handleUpVote={handleUpVote}
+          // downVotes={realPropertie.votes.downVotes}
+          // handleDownVote={handleDownVote}
+          // isFavorite={realPropertie.isFavorite}
+          // handleSetFavorite={handleSetFavorite}
+          // handleAddToCart={handleAddToCart}
         />
       ))}
     </section>

@@ -7,10 +7,10 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, value: action.payload, status: "ok get filter" };
 
     case API_FILTER:
-      return { ...state, responses: action.payload, status: "ok" };
+      return { ...state, realProperties: action.payload, status: "ok" };
 
     case RESET_FILTER:
-      return { ...state, value: "", status: "not ok 2", responses: "" };
+      return { ...state, value: "", status: "not ok 2", realProperties: "" };
 
     default:
       return state;
