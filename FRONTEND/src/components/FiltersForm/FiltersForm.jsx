@@ -140,21 +140,44 @@ const FiltersForm = () => {
                   name="price_gte"
                   options={optionsPrice_gte}
                   submitForm={submitForm}
+                  placeholder={"min prize"}
                 />
                 <SelectField
                   name="price_lte"
                   options={optionsPrice_lte}
                   submitForm={submitForm}
+                  placeholder={"max prize"}
                 />
-                <SelectFieldMulty name="rooms" options={optionsRooms} />
-                <SelectFieldMulty name="baths" options={optionsBaths} />
+                <SelectFieldMulty
+                  name="rooms"
+                  options={optionsRooms}
+                  submitForm={submitForm}
+                />
+                <SelectFieldMulty
+                  name="baths"
+                  options={optionsBaths}
+                  submitForm={submitForm}
+                />
                 <SelectFieldMulty
                   name="conditions"
                   options={optionsConditions}
+                  submitForm={submitForm}
                 />
-                <SelectFieldMulty name="status" options={optionsStatus} />
-                <SelectFieldMulty name="type" options={optionsType} />
-                <SelectFieldMulty name="extras" options={optionsExtras} />
+                <SelectFieldMulty
+                  name="status"
+                  options={optionsStatus}
+                  submitForm={submitForm}
+                />
+                <SelectFieldMulty
+                  name="type"
+                  options={optionsType}
+                  submitForm={submitForm}
+                />
+                <SelectFieldMulty
+                  name="extras"
+                  options={optionsExtras}
+                  submitForm={submitForm}
+                />
 
                 {/* <Checkbox
                   type="checkbox"
