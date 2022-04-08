@@ -31,8 +31,9 @@ export default function SearchForm() {
 
   const handleSaveSearch = (newSearch) => {
     console.log(newSearch);
+    let filter = `province=${newSearch.Search}`
     dispatch(saveSearch(newSearch));
-    dispatch(SavePropertiesFiltered(newSearch.Search));
+    dispatch(SavePropertiesFiltered(filter));
     setHasSubmitted(true);
   };
 

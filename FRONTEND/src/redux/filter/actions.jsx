@@ -19,6 +19,7 @@ export const SavePropertiesFiltered = (string) => {
   return async (dispatch) => {
     // dispatch({ type: LOADING_COUNTER })
     try {
+      console.log(string);
       const apiResult = await getPropertiesFiltered(string);
       dispatch({ type: API_FILTER, payload: apiResult });
     } catch (error) {
