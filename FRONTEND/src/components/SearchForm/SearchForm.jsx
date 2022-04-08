@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useFormik } from "formik";
-
 import * as Yup from "yup";
 
 import Input from "../Input";
@@ -72,13 +71,6 @@ export default function SearchForm() {
               hasErrorMessage={touched.Search}
               errorMessage={errors.Search}
             />
-            {/* <Button
-              submitButton
-              block
-              disabled={formik.isValidating || !formik.isValid}
-            >
-              {isSubmitting ? "Submitting..." : "Submit"}
-            </Button> */}
           </form>
           {hasSubmitted &&
             setTimeout(() => {

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { Formik, Form } from "formik";
-
 import filterSchema from "./filterSchema";
 
-import Button from "../Button";
 import SelectFieldMulty from "../SelectFieldMulty/SelectFieldMulty";
 import SelectField from "../SelectField/SelectField";
 
@@ -19,7 +18,6 @@ const FiltersForm = () => {
     { value: "200000", label: "200 000" },
     { value: "250000", label: "250 000" },
   ];
-
   const optionsPrice_lte = [
     { value: "50000", label: "50 000" },
     { value: "100000", label: "100 000" },
@@ -27,7 +25,6 @@ const FiltersForm = () => {
     { value: "200000", label: "200 000" },
     { value: "250000", label: "250 000" },
   ];
-
   const optionsRooms = [
     { value: 0, label: "Loft" },
     { value: 1, label: "Un dormitorio" },
@@ -35,35 +32,29 @@ const FiltersForm = () => {
     { value: 3, label: "Tres dormitorios" },
     { value: 4, label: "Cuatro dormitorios" },
   ];
-
   const optionsBaths = [
     { value: 1, label: "One bathroom" },
     { value: 2, label: "Two bathrooms" },
     { value: 3, label: "Thre bathrooms" },
   ];
-
   const optionsConditions = [
     { value: "new", label: "new" },
     { value: "Old", label: "Old" },
   ];
-
   const optionsStatus = [
     { value: "available", label: "available" },
     { value: "not available", label: "not available" },
   ];
-
   const optionsType = [
     { value: "Penhause", label: "Penhause" },
     { value: "flat/apartment", label: "flat/apartment" },
     { value: "Hause", label: "Hause" },
   ];
-
   const optionsExtras = [
     { value: { air: true }, label: "air" },
     { value: { garden: true }, label: "garden" },
     { value: { pet: true }, label: "pet" },
   ];
-
   const initValues = {
     price_gte: [],
     price_lte: [],
@@ -74,86 +65,67 @@ const FiltersForm = () => {
     type: [],
     extras: [],
   };
-
   const dispatch = useDispatch();
+  const params = useParams();
+  console.log(params);
+  const navigate = useNavigate();
+
 
   const { value } = useSelector((state) => state.filter);
 
   const handleSaveFiltersString = (values) => {
     console.log(value.Search);
     let string = `&province=${value.Search}`;
-    if(values.baths){
-      values.baths.forEach(element => {
-        string += `&bath=${element.value}`
+    if (values.baths) {
+      values.baths.forEach((element) => {
+        string += `&bath=${element.value}`;
       });
     }
-    if(values.conditions){
-      values.conditions.forEach(element => {
-        string += `&condition=${element.value}`
+    if (values.conditions) {
+      values.conditions.forEach((element) => {
+        string += `&condition=${element.value}`;
       });
     }
-    if(values.extras){
-      values.extras.forEach(element => {
-        if (element.value.garden == true)
-        string += `&garden=true`
-        if (element.value.air == true)
-        string += `&air_conditioning=true`
-        if (element.value.pet == true)
-        string += `&pet=true`
+    if (values.extras) {
+      values.extras.forEach((element) => {
+        if (element.value.garden == true) string += `&garden=true`;
+        if (element.value.air == true) string += `&air_conditioning=true`;
+        if (element.value.pet == true) string += `&pet=true`;
       });
     }
-    if(values.price_gte.value){
-      string += `&price_gte=${values.price_gte.value}`
+    if (values.price_gte.value) {
+      string += `&price_gte=${values.price_gte.value}`;
     }
-    if(values.price_lte.value){
-      string += `&price_lte=${values.price_lte.value}`
+    if (values.price_lte.value) {
+      string += `&price_lte=${values.price_lte.value}`;
     }
-    if(values.rooms){
-      values.rooms.forEach(element => {
-        string += `&room=${element.value}`
+    if (values.rooms) {
+      values.rooms.forEach((element) => {
+        string += `&room=${element.value}`;
       });
     }
-    if(values.status){
-      values.status.forEach(element => {
-        string += `&status=${element.value}`
+    if (values.status) {
+      values.status.forEach((element) => {
+        string += `&status=${element.value}`;
       });
     }
-    if(values.type){
-      values.type.forEach(element => {
-        string += `&type=${element.value}`
+    if (values.type) {
+      values.type.forEach((element) => {
+        string += `&type=${element.value}`;
       });
     }
-    return string
-  }
+    return string;
+  };
 
   const handleSubmit = (values) => {
     console.log(values);
     const filterString = handleSaveFiltersString(values);
     console.log(filterString);
     dispatch(SavePropertiesFiltered(filterString));
+    navigate(`/dashboard/${filterString}`);
   };
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
-  // const formik = useFormik({
-  //   initialValues: initValues,
-  //   validationSchema: filterSchema,
-  //   onSubmit: (values, { setSubmitting }) => {
-  //     console.log(values);
-  //     handleSaveFilters(values);
-  //     setSubmitting(true);
-  //   },
-  // });
-  // const {
-  //   values,
-  //   errors,
-  //   touched,
-  //   handleChange,
-  //   handleBlur,
-  //   handleSubmit,
-  //   isSubmitting,
-  //   submitForm,
-  // } = formik;
 
   return (
     <>
@@ -164,17 +136,7 @@ const FiltersForm = () => {
             initialValues={initValues}
             validationSchema={filterSchema}
           >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              errors,
-              values,
-              touched,
-              isValidating,
-              isValid,
-              submitForm,
-            }) => (
+            {({ submitForm }) => (
               <Form>
                 <SelectField
                   name="price_gte"
@@ -218,57 +180,11 @@ const FiltersForm = () => {
                   options={optionsExtras}
                   submitForm={submitForm}
                 />
-
-                {/* <Checkbox
-                  type="checkbox"
-                  label="Garden"
-                  id="garden"
-                  placeholder="garden"
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  hasErrorMessage={touched.garden}
-                  errorMessage={errors.garden}
-                  submitForm={submitForm}
-                /> */}
-                {/* <Checkbox
-            type="checkbox"
-            label="Swimming Pool"
-            id="pool"
-            value={values.pool}
-            placeholder="pool"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            hasErrorMessage={touched.pool}
-            errorMessage={errors.pool}
-            submitForm={submitForm}
-          />
-          <Checkbox
-            type="checkbox"
-            label="Air conditioning"
-            id="air"
-            value={values.air}
-            placeholder="air"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            hasErrorMessage={touched.air}
-            errorMessage={errors.air}
-            submitForm={submitForm}
-          /> */}
-                <Button
-                  submitButton
-                  block
-                  disabled={false}
-                  // disabled={formik.isValidating || !formik.isValid}
-                >
-                  {/* {isSubmitting ? "Submitting..." : "Submit"} */}
-                  Submit
-                </Button>
               </Form>
             )}
           </Formik>
         </div>
       </div>
-      {hasSubmitted && navigate("/dashboard")}
     </>
   );
 };
