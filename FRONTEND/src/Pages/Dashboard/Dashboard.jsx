@@ -7,15 +7,11 @@ import FiltersForm from "../../components/FiltersForm/FiltersForm";
 import PropertiesListing from "../../components/PropertiesListing";
 
 const Dashboard = () => {
-  const params = useParams();
 
-  const { value, realProperties } = useSelector((state) => state.search);
   const { isLoading } = useSelector((state) => state.isLoading);
-
+  
   let hasError = false;
 
-  console.log(value, realProperties);
-  console.log(params);
   return (
     <>
       <main className="container-fluid">
