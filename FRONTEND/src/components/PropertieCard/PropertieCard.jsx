@@ -11,22 +11,7 @@ function Divider() {
   return <hr className="PropertieCard__divider" />;
 }
 
-// function getPopularityClasses(
-//   currentValue,
-//   limit,
-//   prevClasses,
-//   popularityClassName
-// ) {
-//   const halfLimit = Math.floor(limit / 2);
-
-//   if (currentValue >= halfLimit) {
-//     return `${prevClasses} ${popularityClassName}`;
-//   }
-
-//   return prevClasses;
-// }
-
-function PropertieCard({id, description, img, city, ...props}) {
+function PropertieCard({ id, description, img, city, ...props }) {
   // function onSetFavorite() {
   //   handleSetFavorite(id);
   // }
