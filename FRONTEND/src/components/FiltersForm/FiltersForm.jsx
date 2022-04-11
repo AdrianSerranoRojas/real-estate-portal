@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import filterSchema from "./filterSchema";
 import SelectFieldMulty from "../SelectFieldMulty/SelectFieldMulty";
 import SelectField from "../SelectField/SelectField";
 
-import { SavePropertiesFiltered } from "../../redux/filter/actions";
+import { SavePropertiesFiltered, saveSearch } from "../../redux/filter/actions";
 
 const FiltersForm = () => {
   const optionsPrice_gte = [
@@ -55,6 +55,22 @@ const FiltersForm = () => {
     { value: { garden: true }, label: "garden" },
     { value: { pet: true }, label: "pet" },
   ];
+  //GET URL PARAMS AS OBJECT
+  const paramsString = useParams();
+  let URLparams = new URLSearchParams(paramsString.params);
+  function paramsToObject(entries) {
+    const result = {};
+    for (const [key, value] of entries) {
+      // each 'entry' is a [key, value] tupple
+      result[key] = value;
+    }
+    return result;
+  }
+  const params = paramsToObject(URLparams);
+
+  console.log("URLparams", params);
+  //GET URL PARAMS AS OBJECT
+
   const initValues = {
     price_gte: [],
     price_lte: [],
@@ -66,16 +82,17 @@ const FiltersForm = () => {
     extras: [],
   };
   const dispatch = useDispatch();
-  const params = useParams();
-  console.log(params);
+
   const navigate = useNavigate();
-
-
   const { value } = useSelector((state) => state.filter);
 
+  useEffect(() => {
+    dispatch(saveSearch(URLparams.get("province")));
+    dispatch(SavePropertiesFiltered(paramsString.params));
+  }, [paramsString.params]);
+
   const handleSaveFiltersString = (values) => {
-    console.log(value.Search);
-    let string = `&province=${value.Search}`;
+    let string = `&province=${value}`;
     if (values.baths) {
       values.baths.forEach((element) => {
         string += `&bath=${element.value}`;
@@ -109,19 +126,17 @@ const FiltersForm = () => {
         string += `&status=${element.value}`;
       });
     }
-    if (values.type) {
-      values.type.forEach((element) => {
-        string += `&type=${element.value}`;
+    if (values.types) {
+      values.types.forEach((element) => {
+        string += `&types=${element.value}`;
       });
     }
     return string;
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
     const filterString = handleSaveFiltersString(values);
-    console.log(filterString);
-    dispatch(SavePropertiesFiltered(filterString));
+    console.log("Filters", values);
     navigate(`/dashboard/${filterString}`);
   };
 
