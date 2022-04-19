@@ -41,4 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function properties()
+    {
+        /*
+        *  This is a many to many relationship
+        *  between the property and the user
+        *  Params: Related Model, Pivot Table, Foreign Key of the Current Model, Foreign Key of the Related Model
+        */
+        return $this->belongsToMany(Property::class, 'favourites', 'user_id', 'property_id');
+    }
 }

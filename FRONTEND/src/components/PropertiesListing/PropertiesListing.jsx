@@ -6,10 +6,11 @@ import PropertieCard from "../PropertieCard";
 function PropertiesListing({ ...props }) {
   const { realProperties } = useSelector((state) => state.filter);
   console.log(realProperties);
+
   return (
     <section className="row" {...props}>
-      {realProperties.length >= 1 &&
-        realProperties.map((realPropertie) => (
+      {realProperties.data &&
+        realProperties.data.map((realPropertie) => (
           <PropertieCard
             key={realPropertie.id.toString()}
             id={realPropertie.id}

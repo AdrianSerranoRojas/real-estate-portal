@@ -2,9 +2,11 @@ import axios from "axios";
 
 export async function getPropertiesFiltered(value) {
   console.log(value);
+  const valueSplit = value.slice(1);
+  console.log(valueSplit);
   var config = {
     method: "get",
-    url: `http://localhost:3000/properties?${value}`,
+    url: `http://localhost:8100/api/properties?${valueSplit}`,
     headers: {},
   };
   const result = await axios(config)
